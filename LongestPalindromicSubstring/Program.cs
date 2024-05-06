@@ -4,7 +4,10 @@ static string LongestPalindrome(string s) {
     string maxPalindrome = "";
     System.Console.WriteLine($"s = {s}");
 
-    for (int i = 1; i < s.Length; i++) {
+    if (s.Length <= 1)
+        return s;
+
+    for (int i = 0; i < s.Length; i++) {
         System.Console.WriteLine($"i = {i}");
 
         // odd length palindrome
@@ -14,6 +17,8 @@ static string LongestPalindrome(string s) {
             if (s[i-j] == s[i+j]) {
                 oddPalindrome = Char.ToString(s[i-j]) + oddPalindrome + Char.ToString(s[i+j]);
             }
+            else
+                break;
         }
         if (oddPalindrome.Length > maxPalindrome.Length) {
             maxPalindrome = oddPalindrome;
@@ -26,11 +31,14 @@ static string LongestPalindrome(string s) {
                 if (s[i-j] == s[i+1+j]) {
                     evenPalindrome = Char.ToString(s[i-j]) + evenPalindrome + Char.ToString(s[i+1+j]);
                 }
+                else
+                    break;
             }
             if (evenPalindrome.Length > maxPalindrome.Length) {
                 maxPalindrome = evenPalindrome;
             }
         }
+        System.Console.WriteLine($"---- maxPalindrome = '{maxPalindrome}' ----");
     }
     return maxPalindrome;
 }
@@ -38,5 +46,7 @@ static string LongestPalindrome(string s) {
 // string input = "babad";
 // string input = "cbbd";
 string input = "cbbcd";
+// string input = "bb";
+// string input = "aacabdkacaa";
 string answer = LongestPalindrome(input);
 System.Console.WriteLine($"The answer is '{answer}'");
